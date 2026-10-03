@@ -1,0 +1,42 @@
+@if (appointment() && patient()) {
+  <div class="page-header">
+    <h2>Appointment Details</h2>
+    <a [routerLink]="['/appointments', appointment()!.id, 'edit']" class="btn-primary">Edit</a>
+  </div>
+
+  <div class="details-card">
+    <div class="row"><span class="label">Patient</span><span>{{ patient()!.firstName }} {{ patient()!.lastName }}</span></div>
+    <div class="row"><span class="label">Date</span><span>{{ appointment()!.date }}</span></div>
+    <div class="row"><span class="label">Time</span><span>{{ appointment()!.time }}</span></div>
+    <div class="row"><span class="label">Reason</span><span>{{ appointment()!.reason }}</span></div>
+    <div class="row"><span class="label">Status</span><span>{{ appointment()!.status }}</span></div>
+    <div class="row"><span class="label">Notes</span><span>{{ appointment()!.notes || 'None' }}</span></div>
+  </div>
+
+  <div class="summary-section">
+    <h3>AI Appointment Summary</h3>
+
+    @if (!summary() && !loadingSummary()) {
+      <button class="btn-primary" (click)="generateSummary()">Generate Summary</button>
+    }
+
+    @if (loadingSummary()) {
+      <p class="loading-text">Generating summary...</p>
+    }
+
+    @if (summary()) {
+      <div class="summary-box">
+        <p>{{ summary() }}</p>
+        <button class="btn-secondary" (click)="generateSummary()">Regenerate</button>
+      </div>
+    }
+
+    @if (summaryError()) {
+      <p class="error">{{ summaryError() }}</p>
+    }
+  </div>
+} @else {
+  <p>Loading...</p>
+}
+
+<a routerLink="/appointments">&larr; Back to Appointments</a>

@@ -1,0 +1,11 @@
+@if (showNav) {
+  <nav class="main-nav">
+    <span class="nav-brand">Healthcare System</span>
+    <a routerLink="/dashboard">Dashboard</a>
+    <a routerLink="/patients">Patients</a>
+    <a routerLink="/appointments">Appointments</a>
+  </nav>
+}
+<main class="page-content">
+  <router-outlet></router-outlet>
+</main>

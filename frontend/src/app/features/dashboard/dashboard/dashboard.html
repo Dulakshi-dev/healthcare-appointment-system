@@ -1,0 +1,44 @@
+<h2>Dashboard</h2>
+
+<div class="stats-grid">
+  <div class="stat-card">
+    <span class="stat-number">{{ totalPatients }}</span>
+    <span class="stat-label">Total Patients</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ scheduledCount }}</span>
+    <span class="stat-label">Scheduled Appointments</span>
+  </div>
+  <div class="stat-card">
+    <span class="stat-number">{{ todaysAppointments.length }}</span>
+    <span class="stat-label">Today's Appointments</span>
+  </div>
+</div>
+
+<div class="upcoming-section">
+  <h3>Upcoming Appointments</h3>
+  @if (upcomingAppointments.length === 0) {
+    <p>No upcoming appointments.</p>
+  } @else {
+    <table class="patient-table">
+      <thead>
+        <tr><th>Patient</th><th>Date</th><th>Time</th><th>Reason</th></tr>
+      </thead>
+      <tbody>
+        @for (appt of upcomingAppointments; track appt.id) {
+          <tr>
+            <td>{{ patientName(appt.patientId) }}</td>
+            <td>{{ appt.date }}</td>
+            <td>{{ appt.time }}</td>
+            <td>{{ appt.reason }}</td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  }
+</div>
+
+<div class="quick-links">
+  <a routerLink="/patients" class="btn-primary">View Patients</a>
+  <a routerLink="/appointments" class="btn-primary">View Appointments</a>
+</div>

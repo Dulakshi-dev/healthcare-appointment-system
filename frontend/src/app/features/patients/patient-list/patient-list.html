@@ -1,0 +1,38 @@
+<div class="page-header">
+  <h2>Patients</h2>
+  <a routerLink="/patients/new" class="btn-primary">+ Add Patient</a>
+</div>
+
+<input
+  type="text"
+  placeholder="Search by name..."
+  [(ngModel)]="searchTerm"
+  class="search-box"
+/>
+
+<table class="patient-table">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>DOB</th>
+      <th>Gender</th>
+      <th>Phone</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    @for (patient of filteredPatients; track patient.id) {
+      <tr>
+        <td>{{ patient.firstName }} {{ patient.lastName }}</td>
+        <td>{{ patient.dateOfBirth }}</td>
+        <td>{{ patient.gender }}</td>
+        <td>{{ patient.phone }}</td>
+        <td>
+          <a [routerLink]="['/patients', patient.id]">View</a>
+          <a [routerLink]="['/patients', patient.id, 'edit']">Edit</a>
+          <button (click)="deletePatient(patient.id)">Delete</button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>

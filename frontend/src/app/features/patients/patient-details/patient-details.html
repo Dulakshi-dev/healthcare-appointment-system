@@ -1,0 +1,18 @@
+@if (patient()) {
+  <div class="page-header">
+    <h2>{{ patient()!.firstName }} {{ patient()!.lastName }}</h2>
+    <a [routerLink]="['/patients', patient()!.id, 'edit']" class="btn-primary">Edit</a>
+  </div>
+
+  <div class="details-card">
+    <div class="row"><span class="label">Date of Birth</span><span>{{ patient()!.dateOfBirth }}</span></div>
+    <div class="row"><span class="label">Gender</span><span>{{ patient()!.gender }}</span></div>
+    <div class="row"><span class="label">Phone</span><span>{{ patient()!.phone }}</span></div>
+    <div class="row"><span class="label">Email</span><span>{{ patient()!.email }}</span></div>
+    <div class="row"><span class="label">Address</span><span>{{ patient()!.address }}</span></div>
+  </div>
+} @else {
+  <p>Patient not found.</p>
+}
+
+<a routerLink="/patients">&larr; Back to Patients</a>
